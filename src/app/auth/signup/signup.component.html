@@ -1,0 +1,47 @@
+<section>
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px"
+    #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+            <input type="text" matInput placeholder="First Name" ngModel name="firstName" firstName required #firstNameInput="ngModel">
+            <mat-error *ngIf="firstNameInput.hasError('required')">Field should not be empty.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Last Name" ngModel name="lastName" lastName required #lastNameInput="ngModel">
+            <mat-error *ngIf="lastNameInput.hasError('required')">Field should not be empty.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="email" matInput placeholder="Email" ngModel name="email" email required #emailInput="ngModel">
+            <mat-error *ngIf="emailInput.hasError('required')">Field should not be empty.</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">Please use the correct email format.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" matInput placeholder="Phone Number" ngModel name="phoneNumber" phoneNumber required #phoneNumberInput="ngModel">
+            <mat-error *ngIf="phoneNumberInput.hasError('required')">Field should not be empty.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Address" ngModel name="address" address required #addressInput="ngModel">
+            <mat-error *ngIf="addressInput.hasError('required')">Field should not be empty.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select ngModel placeholder="Select at least 1" name="genres" multiple required #genresSelect="ngModel">
+              <mat-option *ngFor="let genre of genreOptions" [value]="genre">
+                {{ genre }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="genresSelect.hasError('required')">
+              Please select at least 1 Genre. (Currently {{ genres.length }})
+            </mat-error>
+          </mat-form-field>
+        <mat-form-field hintLabel="Please enter minimumn 6 characters.">
+            <input type="password" matInput placeholder="Your password" ngModel name="password"
+            required minlength="6" #passInput="ngModel">
+            <mat-hint align="end">{{ passInput.value?.length }} / 6</mat-hint>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+        <mat-checkbox color="primary" ngModel name="acceptance" required>
+            I accept the terms of conditions of use.
+        </mat-checkbox>
+        <mat-label *ngIf="errorExists">{{ errorText }}</mat-label>
+        <a routerLink="/login">Go back to login</a>
+    </form>
+</section>

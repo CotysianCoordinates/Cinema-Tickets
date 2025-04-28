@@ -1,0 +1,64 @@
+<div fxLayoutAlign="center center">
+<mat-form-field fxFlex="20%">
+    <input matInput type="text" (keyup)="doFilter($event)" placeholder="Input Movie Details">
+</mat-form-field>
+</div>
+<mat-table [dataSource]="movieSource" matSort>
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.title }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="genre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Genre</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.genre }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="duration">
+        <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.duration | number }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="director">
+        <mat-header-cell *matHeaderCellDef>Director</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.director }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actors">
+        <mat-header-cell *matHeaderCellDef>Actors</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.actors.join(', ') }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="releaseDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Release Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.releaseDate | date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="screeningDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Screening Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.screeningDate | date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="screeningTimes">
+        <mat-header-cell *matHeaderCellDef>Screening Times</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <div fxLayout="column" fxLayoutGap="6px">
+                <ng-container *ngFor="let time of element.screeningTimes.keys()">
+                    <a mat-button color="primary" (click)="loadReservationForm(element, time)">{{ time | date:'h:mm a'}}</a>
+                </ng-container>
+            </div>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ticketPrice">
+        <mat-header-cell *matHeaderCellDef>Ticket Price</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.ticketPrice | number }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.status }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="rating">
+        <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.rating | number }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let rows; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSize]="8" [pageSizeOptions]="[8,10,12,14]"></mat-paginator>

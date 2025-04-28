@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit(reservationForm)" #reservationForm="ngForm" fxLayout="column" fxLayoutGap="16px">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Movie Title</mat-label>
+    <input matInput [(ngModel)]="reservation.title" name="title" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Screening Date</mat-label>
+    <input matInput type="date" [(ngModel)]="dateString" [value]="formatDate(reservation.screeningDate)" name="screeningDate" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Screening Time</mat-label>
+    <input matInput type="time" [(ngModel)]="timeString" [value]="formatTime(reservation.screeningTime)" name="screeningTime" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ticket Price</mat-label>
+    <input matInput type="number" [(ngModel)]="reservation.ticketPrice" name="ticketPrice" min="0" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ticket Quantity</mat-label>
+    <input matInput type="number" [(ngModel)]="reservation.ticketQuantity" name="ticketQuantity" min="1" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Ticket Number</mat-label>
+    <input matInput [value]="reservation.ticketNumber" disabled>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="reservationForm.invalid">
+    Submit Reservation
+  </button>
+</form>
+
+
+

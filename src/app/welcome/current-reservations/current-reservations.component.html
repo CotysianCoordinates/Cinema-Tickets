@@ -1,0 +1,24 @@
+<div class="reservation-container" fxLayout="row wrap" fxLayoutGap="24px" fxLayoutAlign="center start">
+    <mat-card *ngFor="let reservation of reservations" class="reservation-card" fxFlex="20">
+      <mat-card-header>
+        <mat-card-title>{{ reservation.title }}</mat-card-title>
+      </mat-card-header>
+  
+      <img mat-card-image [src]=getMovieImage(reservation.title) alt="{{ reservation.title }}" />
+  
+      <mat-card-content>
+        <p><strong>Screening Date:</strong> {{ reservation.screeningDate}}</p>
+        <p><strong>Screening Time:</strong> {{ reservation.screeningTime}}</p>
+        <p><strong>Ticket Price:</strong> ${{ reservation.ticketPrice }}</p>
+        <p><strong>Ticket Quanity:</strong> {{ reservation.ticketQuantity}}</p>
+        <p><strong>Ticket Number:</strong> {{ reservation.ticketNumber}}</p>
+      </mat-card-content>
+  
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="updateReservation(reservation)">Update Reservation</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <title>
+  </title>

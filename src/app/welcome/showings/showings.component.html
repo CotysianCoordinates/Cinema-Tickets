@@ -1,0 +1,27 @@
+<div class="movie-container" fxLayout="row wrap" fxLayoutGap="24px" fxLayoutAlign="center start">
+    <mat-card *ngFor="let movie of movies" class="movie-card" fxFlex="20">
+      <mat-card-header>
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+        <mat-card-subtitle>{{ movie.genre }} | Rating: {{ movie.rating }}/10</mat-card-subtitle>
+      </mat-card-header>
+  
+      <img mat-card-image [src]="movie.imageUrl" alt="{{ movie.title }}" />
+  
+      <mat-card-content>
+        <p>{{ movie.description }}</p>
+        <p><strong>Director:</strong> {{ movie.director }}</p>
+        <p><strong>Actors:</strong> {{ movie.actors.join(', ') }}</p>
+        <p><strong>Duration:</strong> {{ movie.duration }} mins</p>
+        <p><strong>Ticket Price:</strong> ${{ movie.ticketPrice }}</p>
+        <p><strong>Screening Date:</strong> {{ movie.screeningDate | date }}</p>
+        <div *ngFor="let time of movie.screeningTimes.keys()">
+          <a mat-button color="primary" (click)="loadReservationForm(movie, time)">{{ time | date:'h:mm a'}}</a>
+        </div>
+      </mat-card-content>
+  
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="loadReviews(movie.title)">Reviews</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

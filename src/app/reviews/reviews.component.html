@@ -1,0 +1,33 @@
+<div class="reviews-container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="24px" *ngIf="movieTitle">
+    <!-- Header -->
+    <mat-card class="header-card" fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-header>
+        <mat-card-title class="header-title">Reviews for: {{ movieTitle }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  
+    <!-- List of Reviews -->
+    <div fxLayout="column" fxLayoutGap="16px" class="reviews-list">
+      <ng-container *ngIf="reviews.length > 0; else noReviews">
+        <mat-card *ngFor="let review of reviews" class="review-card" fxLayout="column" fxLayoutAlign="start stretch">
+          <mat-card-header>
+            <mat-card-title>{{ review.firstName }} {{ review.lastName }}</mat-card-title>
+            <mat-card-subtitle>Rating: {{ review.rating }}/10</mat-card-subtitle>
+          </mat-card-header>
+  
+          <mat-card-content>
+            <p>{{ review.text }}</p>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+  
+    <!-- No Reviews Message -->
+    <ng-template #noReviews>
+      <mat-card class="no-reviews-card">
+        <mat-card-content>
+          <p>No reviews available for <strong>{{ movieTitle }}</strong>.</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-template>
+  </div>
